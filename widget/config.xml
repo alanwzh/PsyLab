@@ -4,7 +4,7 @@
     <description>
         The first version of PsyLab.
     </description>
-    <author email="developer@apicloud.com" href="http://www.apicloud.com">
+    <author href="https://signormercurio.github.io/">
         Mercury
     </author>
     <content src="index.html" />
