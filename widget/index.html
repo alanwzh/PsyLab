@@ -28,10 +28,10 @@
 <div id="wrap" class="flex-wrap flex-vertical">
     <header>
         <ul>
-            <li class="border-b active" >云API</li>
-            <li class="border-b" >端API</li>
-            <li class="border-b" >开发</li>
-            <li class="border-b" >文档</li>
+            <li class="border-b active" >首页</li>
+            <li class="border-b" >探索</li>
+            <li class="border-b" >关注</li>
+            <li class="border-b" >我的</li>
         </ul>
     </header>
     <div id="main" class="flex-con">
@@ -39,10 +39,10 @@
     </div>
     <div id="footer" class="border-t">
         <ul class="flex-wrap" >
-            <li tapmode="hover" onclick="randomSwitchBtn( this );" class="flex-con active" >云API</li>
-            <li tapmode="hover" onclick="randomSwitchBtn( this );" class="flex-con" >端API</li>
-            <li tapmode="hover" onclick="randomSwitchBtn( this );" class="flex-con" >开发</li>
-            <li tapmode="hover" onclick="randomSwitchBtn( this );" class="flex-con" >文档</li>
+            <li tapmode="hover" onclick="randomSwitchBtn( this );" class="flex-con active" >首页</li>
+            <li tapmode="hover" onclick="randomSwitchBtn( this );" class="flex-con" >探索</li>
+            <li tapmode="hover" onclick="randomSwitchBtn( this );" class="flex-con" >关注</li>
+            <li tapmode="hover" onclick="randomSwitchBtn( this );" class="flex-con" >我的</li>
         </ul>
     </div>
 </div>
@@ -50,6 +50,7 @@
 </html>
 <script type="text/javascript" src="script/api.js"></script>
 <script type="text/javascript">
+    var vcodeButton;
     apiready = function () {
         $api.fixStatusBar( $api.dom('header') );
         api.setStatusBarStyle({
@@ -57,6 +58,8 @@
             color: '#6ab494'
         });
         funIniGroup();
+
+        vcodeButton = api.require('UIButton');
     }
 
     function funIniGroup(){
@@ -107,4 +110,29 @@
             index: index
         });
     }
+
+    function getValidationCode() {
+        var xmlhttp = new XMLHttpRequest();
+
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("myDiv").innerHTML = "Success";
+            }
+        }
+    
+        xmlhttp.open("POST", "http://212.64.25.177:8083/sendMail", true);
+        xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+        xmlhttp.send("mail=936581211@qq.com");
+    }
+    vcodeButton.open({
+        corner: 5,
+        title: {
+            size: 14,
+            normal: '获取验证码'
+        },
+    }, function(ret, err) {
+        if (ret.eventType == "click") {
+            getValidationCode();
+        }
+    });
 </script>
