@@ -8,6 +8,7 @@
     <title>底部导航</title>
     <link rel="stylesheet" type="text/css" href="./css/api.css" />
     <link rel="stylesheet" type="text/css" href="./css/style.css" />
+    <script src="https://upcdn.b0.upaiyun.com/libs/jquery/jquery-2.0.2.min.js"></script>
     <style>
         header{ background-color: #f2f2f2; }
         header ul li { height: 50px; line-height: 50px; text-align: center; display: none; color: #323237; position: relative;font-size: 18px;  }
@@ -52,6 +53,7 @@
 
 </html>
 <script type="text/javascript" src="script/api.js"></script>
+<script type="text/javascript" src="script/common.js"></script>
 <script>
     apiready = function () {
         $api.fixStatusBar($api.dom('header'));
@@ -61,17 +63,7 @@
         });
         funIniGroup();
 
-        api.openFrame({
-            name: 'register',
-            url: './html/register.html',
-            rect: {
-                x: 0,
-                y: 0,
-                w: 'auto',
-                h: 'auto'
-            },
-            bounces: false,
-        });
+        checkLogin();
     }
 
     function funIniGroup() {

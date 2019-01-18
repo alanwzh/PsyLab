@@ -1,11 +1,11 @@
 body {
-    background-image: -webkit-radial-gradient(0px 0px, rgb(0, 0, 0), rgb(246, 248, 248));
+    background-image: -webkit-radial-gradient(0px 0px, #50a3a2, #53e3a6);
 }
 
 form p {
     text-align: right;
     font-size: 13px;
-    color: red;
+    color: yellow;
     left: 40%;
     margin-bottom: 5px;
 }
@@ -51,7 +51,7 @@ div input {
 button {
     width: 100%;
     padding: 8px;
-    background-color: rgb(23, 135, 240);
+    background-color: rgb(7, 172, 144);
     color: #fff;
     border-radius: 10px;
     border: 0;

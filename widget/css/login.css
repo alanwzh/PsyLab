@@ -1,0 +1,82 @@
+body {
+    margin: 0;
+    padding: 0;
+    font: 16px/20px microsoft yahei;
+}
+
+input:active {
+    border: solid #00C5CD 3px;
+}
+
+input {
+    border-radius: 5px;
+}
+
+.register {
+    width: 100%;
+    text-align: center;
+    color: white;
+    font-size: 15px;
+    margin: 35px;
+}
+
+button {
+    border-radius: 5px;
+    font-size: 25px;
+}
+
+button:active {
+    background-color: #00C5CD;
+    color: white;
+    border: white 1px solid;
+}
+
+.msg {
+    margin: 1px;
+    color: #FFEC8B;
+    float: left;
+    left: 20%;
+    position: absolute;
+}
+
+h1 {
+    margin: 30px auto 0 auto;
+}
+
+.container {
+    width: 100%;
+    height: 120%;
+    position: fixed;
+    margin: 0;
+    background: linear-gradient(to bottom right, #50a3a2, #53e3a6);
+    background: -webkit-linear-gradient(to bottom right, #50a3a2, #53e3a6);
+}
+
+.container h1 {
+    text-align: center;
+    color: #FFFFFF;
+    font-weight: 450;
+}
+
+.container input,
+button {
+    width: 60%;
+    display: block;
+    height: 36px;
+    border: 0;
+    outline: 0;
+    padding: 6px 10px;
+    line-height: 24px;
+    margin: 40px auto 5px auto;
+    -webkit-transition: all 0s ease-in 0.1ms;
+    -moz-transition: all 0s ease-in 0.1ms;
+    transition: all 0s ease-in 0.1ms;
+}
+
+.container input[type="text"],
+.container input[type="password"],
+button {
+    background-color: #FFFFFF;
+    font-size: 16px;
+    color: #50a3a2;
+}

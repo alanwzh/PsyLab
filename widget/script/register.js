@@ -2,19 +2,18 @@ var username = $('#username');
 var password = $('#password');
 var mail = $('#mail');
 var vcode = $('#vcode');
-var formData= new FormData();
 
+// 通过向sendMail发送ajax请求获取验证码
 function getVCode() {
-    var fData = formData;
-    fData.set('mail', mail.val());
+    var fData = new FormData();
+    fData.append('mail', mail.val());
 
     $.ajax({
         type: 'POST',
         url: "http://212.64.25.177:8083/sendMail",
         data: fData,
-        contentType: "application/x-www-form-urlencoded; charset=UTF-8",
         dataType: 'JSON',
-        cache: false,
+        cache: false, //如果没有这行和下面两行，会在jQuery的第5行报错：Illegal invocation
         processData: false,
         contentType: false,
         success: function (ret) {
@@ -37,19 +36,20 @@ function getVCode() {
     });
 }
 
+//点击注册按钮，向signUp发送ajax
 function register() {
     if (!check()) return;
-    var fData = formData;
-    fData.set('username', username.val());
-    fData.set('password', password.val());
-    fData.set('mail', mail.val());
-    fData.set('verifyCode', vcode.val());
+
+    var fData = new FormData();
+    fData.append('username', username.val());
+    fData.append('password', password.val());
+    fData.append('mail', mail.val());
+    fData.append('verifyCode', vcode.val());
 
     $.ajax({
         type: 'POST',
         url: "http://212.64.25.177:8083/signUp",
         data: fData,
-        contentType: "application/x-www-form-urlencoded; charset=UTF-8",
         dataType: 'JSON',
         cache: false,
         processData: false,
@@ -77,21 +77,39 @@ function register() {
     });
 }
 
+//检查email格式，为防止前后端规则不一致，发送ajax在后端检查
 function checkMail() {
-    var msg;
-    var reg = /^.*@.*\..*$/; //电子邮件地址为xxx@xxx.xxx
+    var msg = "";
     var flag = true;
-    if (!reg.test(mail.val())) {
-        msg = '请输入合法的邮箱地址！';
-        flag = false;
-    }
+
+    var fData = new FormData();
+    fData.append('mail', mail.val());
+
+    $.ajax({
+        type: 'POST',
+        url: "http://212.64.25.177:8083/checkMailRegex",
+        data: fData,
+        dataType: 'JSON',
+        cache: false,
+        processData: false,
+        contentType: false,
+        success: function (ret) {
+            if (ret == 1) {
+                msg = '请输入合法的邮箱地址！';
+                flag = false;
+            }
+        },
+        error: function (err) {
+            console.log(JSON.stringify(err));
+        }
+    });
 
     $('#mail_msg').text(msg);
     return flag;
 }
 
 function checkPswd() {
-    var msg;
+    var msg = "";
     var reg = /^[A-Za-z0-9]+$/; //密码只能包含数字与字母
     var flag = true;
     if (password.val().length < 8 || password.val().length > 20) {
@@ -121,17 +139,9 @@ function checkName() {
 }
 
 function check() {
-    var ok = true;
-
-    if (!checkName()) {
-        ok = false;
+    var flag = true;
+    if (!checkName() || !checkPswd() || !checkMail()) {
+        flag = false;
     }
-    if (!checkPswd()) {
-        ok = false;
-    }
-    if (!checkMail()) {
-        ok = false;
-    }
-
-    return ok;
+    return flag;
 }
